@@ -53,6 +53,6 @@ class MainView(QtWidgets.QMainWindow, Ui_MainWindow):
             enable_buttons = False if self.model.is_testing() else True
         else:
             enable_buttons = False
-            self.model.stop_testing()
+            self.model.running_task_removeAll()
 
         self.enable_buttons(enable_buttons)
