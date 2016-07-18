@@ -10,12 +10,13 @@ class MainController(object):
         self.task_background.start()
 
     def run_deinit(self):
+        self.model.set_app_is_closing()
         self.model.running_task_removeAll()
         self.task_background.stop()
 
     def run_test(self, test_name):
         if test_name == 'testAll':
-            self.test_all = TestAllThread(self.model)
+            self.test_all = TestAllThread(self.model, 'ALL')
             self.test_all.start()
         else:
             self.task = Task(self.model, 'GPS')

@@ -1,17 +1,27 @@
-from PyQt5 import QtCore
 from Task import Task
 
 
-class TestAllThread(QtCore.QThread):
+class TestAllThread(Task):
+    def __init__(self, model, name):
+        super().__init__(model, name)
 
-    def __init__(self, model):
-        QtCore.QThread.__init__(self)
-        self.model = model
+    def no_dut_or_app_is_closing(self):
+        abort = True if not self.model.is_dut_exist() or self.model.is_app_closing() else False
+        return abort
 
     def run(self):
+        print('start thread:', self.name)
+        self.running = True
+
         tasks = ['GPS', 'WIFI', "AUDIO"]
 
-        for task in tasks:
-            self.task = Task(self.model, task)
+        for task_name in tasks:
+            if self.no_dut_or_app_is_closing():
+                break
+
+            self.task = Task(self.model, task_name)
             self.task.start()
             self.task.wait()
+
+        self.running = False
+        print('stop thread:', self.name)
