@@ -49,7 +49,7 @@ class MainView(QtWidgets.QMainWindow, Ui_MainWindow):
         if msg != '':
             self.ui.listWidget.addItem(msg)
 
-        if self.model.is_dut_exist():
+        if self.model.dut_exist:
             enable_buttons = False if self.model.is_testing() else True
         else:
             enable_buttons = False

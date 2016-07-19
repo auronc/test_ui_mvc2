@@ -12,15 +12,14 @@ class TaskBackground(Task):
         self.running = True
 
         while self.running:
-            dut_exist = self.is_dut_exist()
-            self.model.set_dut_status(dut_exist)
+            self.model.dut_exist = self.check_dut()
 
             QThread.sleep(1)
 
         self.running = False
         print('stop thread:', self.name)
 
-    def is_dut_exist(self):
+    def check_dut(self):
         cmd = 'adb shell ls /'
         try:
             subprocess.check_output(cmd, shell=True)

@@ -10,7 +10,7 @@ class MainController(object):
         self.task_background.start()
 
     def run_deinit(self):
-        self.model.set_app_is_closing()
+        self.model.app_closing = True
         self.model.running_task_removeAll()
         self.task_background.stop()
 

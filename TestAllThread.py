@@ -6,7 +6,7 @@ class TestAllThread(Task):
         super().__init__(model, name)
 
     def no_dut_or_app_is_closing(self):
-        abort = True if not self.model.is_dut_exist() or self.model.is_app_closing() else False
+        abort = True if not self.model.dut_exist or self.model.app_closing else False
         return abort
 
     def run(self):

@@ -5,7 +5,7 @@ class Model(object):
         self.__update_funcs = []
         self.__message = ''
 
-        self.__is_app_closing = False
+        self.__app_closing = False
         self.__dut_exist = False
         self.__running_tasks = {}
 
@@ -20,25 +20,34 @@ class Model(object):
         for name in l:
             self.__running_tasks[name].stop()
 
-    def set_app_is_closing(self):
-        self.__is_app_closing = True
+    @property
+    def app_closing(self):
+        return self.__app_closing
 
-    def is_app_closing(self):
-        return self.__is_app_closing
+    @app_closing.setter
+    def app_closing(self, value):
+        self.__app_closing = value
 
     def pick_message(self):
         msg = self.__message
         self.__message = ''
         return msg
 
-    def set_message(self, msg):
+    @property
+    def message(self):
+        return self.__message
+
+    @message.setter
+    def message(self, msg):
         self.__message = msg
         self.announce_update()
 
-    def is_dut_exist(self):
+    @property
+    def dut_exist(self):
         return self.__dut_exist
 
-    def set_dut_status(self, exist_status):
+    @dut_exist.setter
+    def dut_exist(self, exist_status):
         self.__dut_exist = exist_status
         self.announce_update()
 

@@ -11,7 +11,7 @@ class Task(QtCore.QThread):
         self.running = False
 
     def msg(self, text):
-        self.model.set_message(text)
+        self.model.message = text
 
     def run(self):
         print('start thread:', self.name)
