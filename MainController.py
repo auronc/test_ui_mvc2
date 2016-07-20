@@ -1,6 +1,6 @@
 from TestAllThread import TestAllThread
 from TaskBackground import TaskBackground
-from Task import Task
+from TaskListRoot import TaskListRoot
 
 class MainController(object):
 
@@ -19,5 +19,5 @@ class MainController(object):
             self.test_all = TestAllThread(self.model, 'ALL')
             self.test_all.start()
         else:
-            self.task = Task(self.model, 'GPS')
+            self.task = TaskListRoot(self.model, 'LS')
             self.task.start()
