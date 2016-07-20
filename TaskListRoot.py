@@ -8,10 +8,7 @@ class TaskListRoot(Task):
         super().__init__(model, name)
 
     def run(self):
-        print('start thread:', self.name)
-        self.model.running_task_add(self.name, self)
-        self.running = True
-
+        self.pre_run()
         try:
             self.msg('RUN(' + self.name + ')')
 
@@ -20,10 +17,6 @@ class TaskListRoot(Task):
             self.msg(output)
 
             self.msg('STOP(' + self.name + ')')
-
         except Exception as e:
             print('ERROR:', e)
-
-        self.running = False
-        self.model.running_task_remove(self.name)
-        print('stop thread:', self.name)
+        self.post_run()
