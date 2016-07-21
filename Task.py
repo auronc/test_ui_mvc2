@@ -9,6 +9,7 @@ class Task(QtCore.QThread):
         self.name = name
         self.model = model
         self.running = False
+        self.task_result = False
 
     def msg(self, text):
         self.model.message = text
@@ -37,7 +38,7 @@ class Task(QtCore.QThread):
 
             QThread.sleep(5)
 
-            self.msg('STOP(' + self.name + ')')
+            self.msg('STOP(' + self.name + '), Result= ' + str(self.task_result))
         except Exception as e:
             print('ERROR:', e)
         self.post_run()

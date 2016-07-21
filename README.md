@@ -6,6 +6,7 @@ Enhanced Test GUI template based on my old project:
 ```
 Python 3
 PyQt5
+One Android device with adb enabled
 ```
 
 ## Usage

@@ -39,8 +39,7 @@ class MainView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.test6.setEnabled(enabled)
 
     def btnClicked(self):
-        sender_name = self.sender().objectName()
-        self.main_ctrl.run_test(sender_name)
+        self.main_ctrl.run_test(self.sender())
 
     def update_ui(self):
         # print('update_ui()++')
@@ -56,3 +55,15 @@ class MainView(QtWidgets.QMainWindow, Ui_MainWindow):
             self.model.running_task_removeAll()
 
         self.enable_buttons(enable_buttons)
+
+        # check test result
+        test_result = self.model.pick_test_result()
+        if test_result:
+            sender, is_pass, note = test_result
+            # print('sender', sender)
+            # print('is_pass', is_pass)
+            # print('note', note)
+            if is_pass:
+                sender.setStyleSheet("background-color: rgb(0,255,0);");
+            else:
+                sender.setStyleSheet("background-color: rgb(255,0,0);");

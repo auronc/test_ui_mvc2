@@ -14,9 +14,12 @@ class TaskListRoot(Task):
 
             cmd = 'adb shell ls /'
             output = subprocess.check_output(cmd, shell=True).decode("utf-8")
-            self.msg(output)
+            # self.msg(output)
 
-            self.msg('STOP(' + self.name + ')')
+            self.task_result = True
+            self.msg('STOP(' + self.name + '), Result= ' + str(self.task_result))
         except Exception as e:
             print('ERROR:', e)
         self.post_run()
+
+        self.model.set_test_result(self.task_result, output)

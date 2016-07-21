@@ -14,8 +14,11 @@ class MainController(object):
         self.model.running_task_removeAll()
         self.task_background.stop()
 
-    def run_test(self, test_name):
-        if test_name == 'testAll':
+    def run_test(self, sender):
+        self.model.prepare_test(sender)
+
+        sender_name = sender.objectName()
+        if sender_name == 'testAll':
             self.test_all = TestAllThread(self.model, 'ALL')
             self.test_all.start()
         else:

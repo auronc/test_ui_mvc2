@@ -9,6 +9,9 @@ class Model(object):
         self.__dut_exist = False
         self.__running_tasks = {}
 
+        self.__ui_sender = None
+        self.__test_result = ()
+
     def running_task_add(self, task_name, task):
         self.__running_tasks[task_name] = task
 
@@ -55,6 +58,17 @@ class Model(object):
         number = len(self.__running_tasks)
         testing = True if number > 0 else False
         return testing
+
+    def prepare_test(self, sender):
+        self.__ui_sender = sender
+
+    def set_test_result(self, is_pass, note):
+        self.__test_result = self.__ui_sender, is_pass, note
+
+    def pick_test_result(self):
+        result = self.__test_result
+        self.__test_result = ()
+        return result
 
     def subscribe_update_func(self, func):
         if func not in self.__update_funcs:
