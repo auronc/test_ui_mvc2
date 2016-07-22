@@ -39,7 +39,9 @@ class MainView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.test6.setEnabled(enabled)
 
     def btnClicked(self):
-        self.main_ctrl.run_test(self.sender())
+        sender = self.sender()
+        sender.setEnabled(False)
+        self.main_ctrl.run_test(sender)
 
     def update_ui(self):
         # print('update_ui()++')
