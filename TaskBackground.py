@@ -15,7 +15,7 @@ class TaskBackground(Task):
 
             QThread.sleep(1)
 
-        self.pre_run(False)
+        self.post_run(False)
 
     def check_dut(self):
         cmd = 'adb shell ls /'
