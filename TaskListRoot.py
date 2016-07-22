@@ -9,6 +9,8 @@ class TaskListRoot(Task):
 
     def run(self):
         self.pre_run()
+
+        output = ''
         try:
             self.msg('RUN(' + self.name + ')')
 
